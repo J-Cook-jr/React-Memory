@@ -1,4 +1,4 @@
-.MemoryCard{
+.MemoryCard_back{
     display: inline-block;
     width: 150px;
     height: 80px;
@@ -29,3 +29,18 @@ img{
     width: 60px;
     padding-top: 11px;
 }
+
+.MemoryCard{
+
+}
+
+.MemoryCard_inner{
+
+}
+
+.MemoryCard_front{
+
+}
+
+
+
