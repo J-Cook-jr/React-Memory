@@ -1,4 +1,5 @@
 import React from 'react';
+import MemoryCard from './components/MemoryCard.jsx';
 import './App.css';
 
 function App() {
