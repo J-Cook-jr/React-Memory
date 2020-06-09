@@ -58,6 +58,10 @@ img{
     backface-visibility: hidden;
 }
 
+.MemoryCard_inner.flipped{
+    transform: rotateY(180deg);
+}
+
 
 
 
