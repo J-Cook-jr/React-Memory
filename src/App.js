@@ -5,11 +5,11 @@ import './App.css';
 function generateDeck() {
   let symbols = ['∆', 'ø', '£', '$', '•', '§', '+', 'ß']
   let deck = []
-  
+
   for (let i = 0; i < 16; i++) {
     deck.push({
       isFlipped: false,
-      symbol: symbols[i%8]
+      symbol: symbols[i % 8]
     })
     return shuffle(deck);
   }
@@ -20,12 +20,12 @@ function generateDeck() {
  * @param {Array} a items An array containing the items.
  */
 function shuffle(a) {
-  var j, x, i;
+  let j, x, i;
   for (i = a.length - 1; i > 0; i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      x = a[i];
-      a[i] = a[j];
-      a[j] = x;
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
   }
   return a;
 }
@@ -33,11 +33,16 @@ function shuffle(a) {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {deck: generateDeck};
-    this.state = {pickedCards: []};
+    this.state = { deck: generateDeck };
+    this.state = { pickedCards: [] };
   }
 
   render() {
+    let cardsJSX = this.state.deck.map((card, index) => {
+      return <MemoryCard />
+
+    })
+
     return (
       <div className="App">
         <header className="App-header">
@@ -45,28 +50,16 @@ class App extends Component {
           <h4>Match Cards to win</h4>
         </header>
         <div class="grid-container">
-          <MemoryCard></MemoryCard>
-          <MemoryCard></MemoryCard>
-          <MemoryCard></MemoryCard>
-          <MemoryCard></MemoryCard>
+          {cardsJSX.slice(0, 4)}
         </div>
         <div class="grid-container">
-          <MemoryCard></MemoryCard>
-          <MemoryCard></MemoryCard>
-          <MemoryCard></MemoryCard>
-          <MemoryCard></MemoryCard>
+          {cardsJSX.slice(4, 8)}
         </div>
         <div class="grid-container">
-          <MemoryCard></MemoryCard>
-          <MemoryCard></MemoryCard>
-          <MemoryCard></MemoryCard>
-          <MemoryCard></MemoryCard>
+          {cardsJSX.slice(8, 12)}
         </div>
         <div class="grid-container">
-          <MemoryCard></MemoryCard>
-          <MemoryCard></MemoryCard>
-          <MemoryCard></MemoryCard>
-          <MemoryCard></MemoryCard>
+          {cardsJSX.slice(12, 16)}
         </div>
       </div>
     );
