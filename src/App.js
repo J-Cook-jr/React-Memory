@@ -3,16 +3,16 @@ import MemoryCard from './components/MemoryCard.jsx';
 import './App.css';
 
 function generateDeck() {
-  let symbols = ['∆', 'ø', '£', '$', '•', '§', '+', 'ß']
-  let deck = []
+  let symbols = ['∆', 'ø', '£', '$', '•', '§', '+', 'ß'];
+  let deck = [];
 
   for (let i = 0; i < 16; i++) {
     deck.push({
       isFlipped: false,
-      symbol: symbols[i % 8]
+      symbol: symbols[i%8]
     })
-    return shuffle(deck);
   }
+  return shuffle(deck);
 }
 
 /**
@@ -33,14 +33,21 @@ function shuffle(a) {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { deck: generateDeck };
-    this.state = { pickedCards: [] };
+    this.state = {
+      deck: generateDeck(),
+      pickedCards: []
+    }
+  }
+
+  pickCard(cardIndex) {
+    if (this.state.deck[cardIndex].isFlipped) {
+      return;
+    }
   }
 
   render() {
     let cardsJSX = this.state.deck.map((card, index) => {
-      return <MemoryCard />
-
+      return <MemoryCard symbol={card.symbol} isFlipped={card.isFlipped} key={index}/>
     })
 
     return (
