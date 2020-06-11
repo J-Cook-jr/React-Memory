@@ -35,7 +35,9 @@ class App extends Component {
     super(props);
     this.state = {
       deck: generateDeck(),
-      pickedCards: []
+      pickedCards: [],
+      won: false,
+      count: 0
     }
   }
 
@@ -66,8 +68,13 @@ class App extends Component {
       }
       newPickedCards = [];
     }
-    this.setState({ deck: newDeck, pickedCards: newPickedCards }
+
+    let newCount = this.state.count;
+    newCount++
+    this.setState({ deck: newDeck, pickedCards: newPickedCards, count: newCount }
     );
+
+    this.gameOver(newDeck)
   }
 
   unflipCards(card1Index, card2Index) {
@@ -90,6 +97,23 @@ class App extends Component {
     });
   }
 
+  gameOver = (deck) => {
+    if (deck.filter((card) => {
+      return !card.isFlipped;
+    }).length === 0) {
+      this.setState({ won: true });
+    }
+  }
+
+  handleClick = () => {
+    this.setState({
+      deck: generateDeck(),
+      pickedCards: [],
+      won: false,
+      count: 0
+    })
+  }
+
 
   render() {
     let cardsJSX = this.state.deck.map((card, index) => {
@@ -102,6 +126,7 @@ class App extends Component {
         <header className="App-header">
           <h1>Memory Game</h1>
           <h4>Match Cards to win</h4>
+          <h5>Flips: {Math.ceil(this.state.count / 2)}</h5>
         </header>
         <div class="grid-container">
           {cardsJSX.slice(0, 4)}
@@ -114,6 +139,9 @@ class App extends Component {
         </div>
         <div class="grid-container">
           {cardsJSX.slice(12, 16)}
+        </div>
+        <div className="resetButton" >
+          {this.state.won && <button onClick={this.handleClick}>Play again</button>}
         </div>
       </div>
     );
