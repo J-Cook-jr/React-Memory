@@ -47,20 +47,22 @@ class App extends Component {
     cardToFlip.isFlipped = true;
 
     let newPickedCards = this.state.pickedCards.concat(cardIndex);
+
     let newDeck = this.state.deck.map((card, index) => {
       if (cardIndex === index) {
-        return  cardToFlip
+        return cardToFlip
       }
       return card
     })
-    this.setState({deck: newDeck, pickedCards: newPickedCards}
+    this.setState({ deck: newDeck, pickedCards: newPickedCards }
     );
   }
-  
-  
+
+
   render() {
     let cardsJSX = this.state.deck.map((card, index) => {
-      return <MemoryCard symbol={card.symbol} isFlipped={card.isFlipped} key={index} />
+      return <MemoryCard symbol={card.symbol} isFlipped={card.isFlipped} key={index} pickCard={this.pickCard.bind(this, index)}
+      />
     })
 
     return (
