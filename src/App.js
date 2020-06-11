@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import MemoryCard from './components/MemoryCard.jsx';
 import './App.css';
 
+function generateDeck() {
+  let symbols = ['∆', 'ø', '£', '$', '•', '§', '+', 'ß']
+  let deck = []
+  
+  for (let i = 0; i < 16; i++) {
+    deck.push({
+      isFlipped: false,
+      symbol: symbols[i%8]
+    })
+    
+  }
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
