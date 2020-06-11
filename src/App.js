@@ -54,8 +54,38 @@ class App extends Component {
       }
       return card
     })
+
+    if (newPickedCards.length === 2) {
+      let card1Index = newPickedCards[0];
+      let card2Index = newPickedCards[1];
+      
+      if (newDeck[card1Index].symbol !== newDeck[card2Index].symbol) {
+        this.unflipCards(card1Index, card2Index)
+      }
+      newPickedCards = [];
+    }
     this.setState({ deck: newDeck, pickedCards: newPickedCards }
     );
+  }
+
+  unflipCards(card1Index, card2Index){
+    let card1= {...this.state.deck[card1Index]};
+    card1.isFlipped = false;
+    let card2= {...this.state.deck[card2Index]};
+    card2.isFlipped = false;
+
+    let newDeck = this.state.deck.map((card, index) => {
+      if (card1Index === index) {
+        return card1;
+      } else if (card2Index === index) {
+        return card2;
+      }
+      return card;
+    });
+
+    this.setState({ 
+      deck: newDeck
+    });
   }
 
 
